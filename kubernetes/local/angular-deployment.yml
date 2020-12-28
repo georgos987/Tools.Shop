@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app-angular-tool
+  name: app-angular-tool
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-angular-tool
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: app-angular-tool
+    spec:
+      containers:
+      - image: localhost:5000/angular-ec
+        name: app-angular-tool
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: angular-service
+  name: angular-service
+spec:
+  type: LoadBalancer
+  ports:
+  - name: 4200-4200
+    port: 4200
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: app-angular-tool
+---
+
+
