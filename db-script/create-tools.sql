@@ -1,15 +1,15 @@
 -- -----------------------------------------------------
--- Schema tools-shop
+-- Schema tools_shop
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `tools-shop`;
+DROP SCHEMA IF EXISTS `tools_shop`;
 
-CREATE SCHEMA `tools-shop`;
-USE `tools-shop` ;
+CREATE SCHEMA `tools_shop`;
+USE `tools_shop` ;
 
 -- --------------------u---------------------------------
--- Table `tools-shop`.`tool_category`
+-- Table `tools_shop`.`tool_category`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tools-shop`.`tool_category` (
+CREATE TABLE IF NOT EXISTS `tools_shop`.`tool_category` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `category_name` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
@@ -17,9 +17,9 @@ ENGINE=InnoDB
 AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
--- Table `tools-shop`.`tool`
+-- Table `tools_shop`.`tool`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tools-shop`.`tool` (
+CREATE TABLE IF NOT EXISTS `tools_shop`.`tool` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) DEFAULT NULL,
   `description` VARCHAR(255) DEFAULT NULL,
@@ -38,9 +38,9 @@ ENGINE=InnoDB
 AUTO_INCREMENT = 1;
 
 -- --------------------u---------------------------------
--- Table `tools-shop`.`customer_address`
+-- Table `tools_shop`.`customer_address`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tools-shop`.`customer_address` (
+CREATE TABLE IF NOT EXISTS `tools_shop`.`customer_address` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `country` VARCHAR(255) NULL DEFAULT NULL,
   `city` VARCHAR(255) NULL DEFAULT NULL,
@@ -53,9 +53,9 @@ ENGINE=InnoDB
 AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
--- Table `tools-shop`.`customer`
+-- Table `tools_shop`.`customer`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `tools-shop`.`customer` (
+CREATE TABLE IF NOT EXISTS `tools_shop`.`customer` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(255) NOT NULL,
   `last_name` VARCHAR(255)  Not NULL,
@@ -76,7 +76,7 @@ AUTO_INCREMENT = 1;
 -- -----------------------------------------------------
 -- Table structure for table `role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `roles`;
+DROP TABLE IF EXISTS `tools_shop.roles`;
 CREATE TABLE `roles` (
   `id` BIGINT(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,

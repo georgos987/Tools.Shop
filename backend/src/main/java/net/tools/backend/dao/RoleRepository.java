@@ -11,6 +11,6 @@ import net.tools.backend.security.CrossOriginConst;
 
 @CrossOrigin(CrossOriginConst.CROSS_ORIGIN)
 @EnableWebSecurity
-public interface RoleRepository extends JpaRepository<Role, Integer> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
    Role findByName(RoleName roleName);
 }

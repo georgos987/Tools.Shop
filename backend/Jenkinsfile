@@ -1,0 +1,21 @@
+pipeline {
+  agent any
+  stages {
+      stage('run spring image') {
+        steps {
+          git branch: 'main', credentialsId: 'Git', url: 'https://github.com/georgos987/tools.shop.git'
+
+          withCredentials([usernamePassword( credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+           bat 'docker login -u  %USERNAME%  -p %PASSWORD%'
+          }
+          bat 'docker rmi -f localhost:5000/springimage'
+          bat 'cd backend & mvn clean'
+          bat 'cd backend & mvnw spring-boot:build-image'
+          bat 'docker tag backend:0.0.1-SNAPSHOT localhost:5000/springimage'
+          bat 'docker push localhost:5000/springimage'
+          bat 'cd kubernetes/local & kubectl apply -f ./springboot-deployment.yml'
+        }
+      }
+  }
+}
+

@@ -12,8 +12,8 @@ import { Ip } from '../modules/ip';
 })
 export class ToolService {
   private ip = Ip.IP;
-  private baseUrl = `${this.ip}:8080/tools`;
-  private categoryUrl = `${this.ip}:8080/tool-category`;
+  private baseUrl = `${this.ip}/tools`;
+  private categoryUrl = `${this.ip}/tool-category`;
 
 
   constructor(private httpCients: HttpClient) { }

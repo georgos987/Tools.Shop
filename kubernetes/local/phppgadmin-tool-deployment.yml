@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-phppgadmin
+  labels:
+    app: app-phppgadmin
+spec:
+  selector:
+    matchLabels:
+      app: app-phppgadmin
+  template:
+    metadata:
+      labels:
+        app: app-phppgadmin
+    spec:
+      containers:
+      - name: app-phppgadmin
+        image: dockage/phppgadmin:latest
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+        env: 
+        - name: POSTGRES_PASSWORD
+          value: d136fd0e19cf
+        - name: POSTGRES_USER
+          value: ed2805af2b0a
+
+        - name: POSTGRES_DB
+          value: SizJNRoLFDbZ
+        - name: PHP_PG_ADMIN_SERVER_HOST
+          value: postgres-b74d53e8-bc46-484b-8c87-2dda16bf5b41.ce4jcviyvogb.eu-central-1.rds.amazonaws.com
+        - name: PHP_PG_ADMIN_SERVER_PORT
+          value: "1512"
+        - name: POSTGRES_PORT
+          value: "1512"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  phppgadmin-sevice-postgres
+spec:
+  type: LoadBalancer  
+  selector:
+    app:  app-phppgadmin
+  ports:
+  - port: 8006
+    targetPort: 80
+    nodePort: 31091
+
+
+    

@@ -1,0 +1,17 @@
+pipeline {
+  agent any
+  stages {
+      stage('run mysql') {
+        steps {
+          git branch: 'main', credentialsId: 'Git', url: 'https://github.com/georgos987/tools.shop.git'
+
+          withCredentials([usernamePassword( credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+           bat 'docker login -u  %USERNAME%  -p %PASSWORD%'
+          }
+          bat  'cd kubernetes/local & kubectl apply -f ./mysql-tool-deployment.yml'
+          bat  'cd kubernetes/local & kubectl apply -f ./phpmyadmin-tool-deployment.yml'
+        }
+      }
+  }
+}
+

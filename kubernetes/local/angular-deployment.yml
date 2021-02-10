@@ -16,7 +16,7 @@ spec:
         app: app-angular-tool
     spec:
       containers:
-      - image: localhost:5000/angular-ec
+      - image: localhost:5000/angularimage
         name: app-angular-tool
         resources: {}
 status: {}

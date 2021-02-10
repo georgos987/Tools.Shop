@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-postgres-tool
+  labels:
+    app: app-postgres-tool
+spec:
+  replicas: 1
+  selector:
+
+    matchLabels:
+      app: app-postgres-tool
+  template:
+    metadata:
+      labels:
+        app: app-postgres-tool
+    spec:
+      containers:
+      - name: app-postgres-tool
+        image: postgres:12
+        volumeMounts:
+          - mountPath: /var/lib/postgresql
+            name: postgres-volume
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+        ports:
+        - containerPort: 5432
+
+        env: 
+        - name: POSTGRES_PASSWORD
+          value: root
+      volumes:
+        - name: postgres-volume
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim-tool
+
+   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service-tool
+spec:
+  type: LoadBalancer
+  selector:
+    app: app-postgres-tool
+  ports:
+  - port: 5432
+    targetPort: 5432
+    nodePort: 31010
+
+
+
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pv-claim-tool
+  labels:
+    app: app-postgres-tool
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi

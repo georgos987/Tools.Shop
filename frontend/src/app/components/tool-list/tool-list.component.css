@@ -1,11 +1,10 @@
 .pageClass{
-    /* margin: auto; */
+    text-align: center;
     float: left;
-     /* padding-left: 1cm;  */
-    margin-top: 70%;
-    margin-left: 200%;
-    
-    /* padding: 10%; */  
+         margin-top: 10rem;
+    margin-left: 15rem;
+    position: relative;
+  
 }
 .img-tool{
     width: 14rem;

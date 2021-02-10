@@ -11,7 +11,7 @@ import { Ip } from 'src/app/modules/ip';
 export class AuthenticationService {
 
   private ip = Ip.IP;
-  private baseUrl: string = `${this.ip}:8080`
+  private baseUrl: string = `${this.ip}`
   constructor(private http: HttpClient) { }
 
   ClearLocalStorgeAfter12Hour() {

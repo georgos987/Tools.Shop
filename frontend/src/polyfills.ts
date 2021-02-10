@@ -61,6 +61,12 @@ import '@angular/localize/init';
  */
 import 'zone.js/dist/zone';  // Included with Angular CLI.
 
+/**
+* Required to support Web Animations `@angular/platform-browser/animations`.
+* Needed for: All but Chrome, Firefox and Opera. https://caniuse.com/web-animation
+**/
+import 'web-animations-js';
+
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

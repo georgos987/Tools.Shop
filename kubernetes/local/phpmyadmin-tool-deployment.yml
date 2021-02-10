@@ -24,7 +24,13 @@ spec:
         - containerPort: 80
         env: 
         - name: MYSQL_ROOT_PASSWORD
-          value: root
+          value: "12122012ge"
+        - name: "MYSQL_DATABASE"
+          value: "tools_shop"
+        - name: "MYSQL_USER"
+          value: "georgos"
+        - name: "MYSQL_PASSWORD"
+          value: "12122012ge"
         - name: PMA_HOST
           value: mysql-service-tool
         - name: PMA_PORT
@@ -32,3 +38,16 @@ spec:
         - name: MYSQL_PORT
           value: "3306"
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  phpmyadmin-sevice-tool
+spec:
+  type: LoadBalancer  
+  selector:
+    app:  app-tool-phpmyadmin
+  ports:
+  - port: 8000
+    targetPort: 80
+    nodePort: 31002

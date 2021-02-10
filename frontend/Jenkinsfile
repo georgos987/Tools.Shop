@@ -1,0 +1,20 @@
+pipeline {
+  agent any
+  stages {
+      stage('run angular image') {
+        steps {
+          git branch: 'main', credentialsId: 'Git', url: 'https://github.com/georgos987/tools.shop.git'
+
+          withCredentials([usernamePassword( credentialsId: 'docker-hub', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+           bat 'docker login -u  %USERNAME%  -p %PASSWORD%'
+          }
+          bat 'docker rmi -f localhost:5000/angularimage'
+          bat 'cd frontend & docker build -t  angularimage .'
+          bat 'docker tag angularimage  localhost:5000/angularimage'
+          bat 'docker push  localhost:5000/angularimage'
+          bat 'cd kubernetes/local & kubectl apply -f ./angular-deployment.yml'
+        }
+      }
+  }
+}
+

@@ -13,8 +13,8 @@ export class RegisterService {
 
   public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private ip = Ip.IP;
-  private baseUrl = `${this.ip}:8080/customers`;
-  private addressesUrl = `${this.ip}:8080/addresses`;
+  private baseUrl = `${this.ip}/customers`;
+  private addressesUrl = `${this.ip}/addresses`;
 
   constructor(private httpCients: HttpClient) { }
 
