@@ -10,6 +10,9 @@ pipeline {
           }
           bat 'docker rmi -f localhost:5000/springimage'
           bat 'cd backend & mvn clean'
+          withCredentials([file( credentialsId: 'app', variable: 'APP')]) {
+           bat 'xcopy %APP% "./backend/src/main/resources/application.properties" /Y '
+          }
           bat 'cd backend & mvnw spring-boot:build-image'
           bat 'docker tag backend:0.0.1-SNAPSHOT localhost:5000/springimage'
           bat 'docker push localhost:5000/springimage'
